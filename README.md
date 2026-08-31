@@ -1,4 +1,4 @@
-# CSC-122-Wk2
+# A Class-ic Hero's Journey lab
 
 Create a class representing a Hero.
 
