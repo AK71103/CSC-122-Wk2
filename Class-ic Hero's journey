@@ -1,3 +1,48 @@
 //9-1-26
 //Alexander W Kazantzis
 //Class-ic Hero's journey
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <cstdlib> //for rand & srand
+#include <ctime> //for time
+
+//the Hero class
+class Hero {  
+    int StatStr; //Strength variable
+    int StatCrg; //Courage variable
+    std::string Name; //Name variable
+
+   `void statGen() { //generate random stats for the hero    
+        StatStr = std::rand() % 25 + 1; //random strength between 1 and 25
+        StatCrg = std::rand() % 25 + 1; //random courage between 1 and 25
+    void getStats() { //get the hero's stats
+        std::cout << "Strength: " << StatStr << std::endl;
+        std::cout << "Courage: " << StatCrg << std::endl;
+    }
+
+    void Train() { //hero trains to increase strength 
+
+    } 
+
+    void Therapy() { //hero goes to therapy to increase courage
+
+    } 
+};
+
+int main() {
+    //question for the user to input their hero's name
+    std::string heroName;
+    std::cout << "Enter your hero's name: ";
+    std::getline(std::cin, heroName);
+
+    Hero hero(heroName);
+    hero.getStats();
+
+    hero.Train(); //the hero trains to increase strength
+
+    hero.Therapy(); //the hero goes to therapy to increase courage
+    return 0;
+
+};
