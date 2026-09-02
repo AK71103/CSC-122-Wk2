@@ -43,6 +43,8 @@ class Hero {
 
 
 int main() {
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+    
     //question for the user to input their hero's name
     std::string heroName;
     std::cout << "Enter your hero's name: ";
