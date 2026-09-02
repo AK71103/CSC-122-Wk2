@@ -40,17 +40,22 @@ int main() {
     Hero hero(heroName);
     hero.getStats();
 
-    int choice;
-    std::cout << "What would you like your hero to do? (1) Train (2) Therapy: ";
-    std::cin >> choice;
-    if (choice == 1) {
+    int choice; //choosing between training and therapy
+        std::cout << "What would you like your hero to do? (1) Train (2) Therapy: ";
+        std::cin >> choice;
+        if (choice == 1) {
         hero.Train(); //the hero trains to increase strength
-    } else if (choice == 2) {
-        hero.Therapy(); //the hero goes to therapy to increase courage
-    } else {
+        } 
+        else if (choice == 2) {
+        hero.Therapy(); //the hero goes to therapy to increase courage 
+        } 
+        else {
         std::cout << "Invalid choice. Please choose 1 or 2." << std::endl;
-    }
-    hero.getStats(); //display the updated stats
+        }
+        hero.getStats(); //display the updated stats
+    return 0;
+
+};
     return 0;
 
 };
