@@ -14,16 +14,17 @@ class Hero {
     int StatCrg; //Courage variable
     std::string Name; //Name variable
 
-   `void statGen() { //generate random stats for the hero    
+    void statGen() { //generate random stats for the hero    
         StatStr = std::rand() % 25 + 1; //random strength between 1 and 25
         StatCrg = std::rand() % 25 + 1; //random courage between 1 and 25
+    }
     void getStats() { //get the hero's stats
         std::cout << "Strength: " << StatStr << std::endl;
         std::cout << "Courage: " << StatCrg << std::endl;
     }
 
     void Train() { //hero trains to increase strength 
-        StatStr += 5; //increase strength by 5
+         StatStr += 5; //increase strength by 5
     } 
 
     void Therapy() { //hero goes to therapy to increase courage
@@ -38,11 +39,23 @@ int main() {
     std::getline(std::cin, heroName);
 
     Hero hero(heroName);
-    hero.getStats();
-
-    hero.Train(); //the hero trains to increase strength
-
-    hero.Therapy(); //the hero goes to therapy to increase courage
+     hero.getStats();
+    
+    int choice; //choosing between training and therapy
+        std::cout << "What would you like your hero to do? (1) Train (2) Therapy: ";
+        std::cin >> choice;
+        std::string input;
+        getline(std::cin, input); //clear the input buffer
+        if (choice == 1) {
+        hero.Train(); //the hero trains to increase strength
+        } 
+        else if (choice == 2) {
+        hero.Therapy(); //the hero goes to therapy to increase courage 
+        } 
+        else {
+        std::cout << "Invalid choice. Please choose 1 or 2." << std::endl;
+        }
+        hero.getStats(); //display the updated stats
     return 0;
 
 };

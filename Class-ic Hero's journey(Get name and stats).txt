@@ -39,10 +39,6 @@ int main() {
 
     Hero hero(heroName);
     hero.getStats();
-
-    hero.Train(); //the hero trains to increase strength
-
-    hero.Therapy(); //the hero goes to therapy to increase courage
     return 0;
 
 };
