@@ -1,0 +1,37 @@
+int main() {
+    //question for the user to input their hero's name
+    std::string heroName;
+    std::cout << "Enter your hero's name: ";
+    std::getline(std::cin, heroName);
+
+    Hero hero(heroName);
+     hero.getStats();
+    
+    int choice; //choosing between training and therapy
+        while (true) {
+            std::cout << "What would you like your hero to do? (1) Train (2) Therapy: ";
+            std::cin >> choice;
+            std::string input;
+            getline(std::cin, input); //clear the input buffer
+            if (choice == 1) {
+                hero.Train(); //the hero trains to increase strength
+                Hero hero(heroName);
+                hero.getStats();
+                continue;
+            } 
+            else if (choice == 2) {
+                hero.Therapy(); //the hero goes to therapy to increase courage
+                Hero hero(heroName);
+                hero.getStats();
+                continue;
+            } 
+            else {
+                std::cout << "Invalid choice. Please choose 1 or 2." << std::endl;
+                continue;
+            }
+            Hero hero(heroName);
+            hero.getStats(); //display the updated stats
+        }
+    return 0;
+
+};
