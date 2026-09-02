@@ -1,3 +1,47 @@
+//9-1-26
+//Alexander W Kazantzis
+//Class-ic Hero's journey
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <cstdlib> //for rand & srand
+#include <ctime> //for time
+
+//the Hero class
+class Hero {  
+     std::string strength; //Strength variable constructor
+     std::string courage; //Courage variable constructor
+    private:
+        int GenStatStr; // Generate strength stat
+        int GenStatCrg; // Generate courage stat
+        int StatStr = 0; // Final Strength variable
+        int StatCrg = 0; // Final Courage variable
+    public:
+        std::string Name; //Name variable
+        Hero(std::string n) : Name(n) {
+            StatGen();
+        }
+        void StatGen() { //generate random stats for hero
+            GenStatStr = std::rand() % 25 + 1; //random strength between 1 and 25
+            GenStatCrg = std::rand() % 25 + 1; //random courage between 1 and 25
+            StatStr += GenStatStr;
+            StatCrg += GenStatCrg;
+        }
+    void GetStats() { //get the hero's stats
+        std::cout << "Strength: " << StatStr << std::endl;
+        std::cout << "Courage: " << StatCrg << std::endl;
+    }
+    void Train() { //hero trains to increase strength 
+        StatStr += 5; //increase strength by 5
+    } 
+
+    void Therapy() { //hero goes to therapy to increase courage
+        StatCrg += 5; //increase courage by 5
+    } 
+};
+
+
 int main() {
     //question for the user to input their hero's name
     std::string heroName;
@@ -5,32 +49,34 @@ int main() {
     std::getline(std::cin, heroName);
 
     Hero hero(heroName);
-     hero.getStats();
+     hero.GetStats();
     
     int choice; //choosing between training and therapy
         while (true) {
-            std::cout << "What would you like your hero to do? (1) Train (2) Therapy: ";
+            std::cout << "What would you like your hero to do? (1) Train (2) Therapy (0) Exit: ";
             std::cin >> choice;
             std::string input;
             getline(std::cin, input); //clear the input buffer
             if (choice == 1) {
                 hero.Train(); //the hero trains to increase strength
-                Hero hero(heroName);
-                hero.getStats();
+                hero.GetStats();
                 continue;
             } 
             else if (choice == 2) {
                 hero.Therapy(); //the hero goes to therapy to increase courage
-                Hero hero(heroName);
-                hero.getStats();
+                hero.GetStats();
                 continue;
             } 
+            else if (choice == 0) {
+                std::cout << "Farewell for Now!"; std::cin >> choice;
+                return 0;
+            }
             else {
-                std::cout << "Invalid choice. Please choose 1 or 2." << std::endl;
+                std::cout << "Invalid choice. Please choose 1,2, or 0." << std::endl;
                 continue;
             }
             Hero hero(heroName);
-            hero.getStats(); //display the updated stats
+            hero.GetStats(); //display the updated stats
         }
     return 0;
 
