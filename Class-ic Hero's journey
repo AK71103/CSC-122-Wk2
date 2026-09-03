@@ -10,52 +10,110 @@
 
 //the Hero class
 class Hero {  
-    int StatStr; //Strength variable
-    int StatCrg; //Courage variable
-    std::string Name; //Name variable
-
-   `void statGen() { //generate random stats for the hero    
-        StatStr = std::rand() % 25 + 1; //random strength between 1 and 25
-        StatCrg = std::rand() % 25 + 1; //random courage between 1 and 25
-    void getStats() { //get the hero's stats
+     std::string strength; //Strength variable constructor
+     std::string courage; //Courage variable constructor
+    private:
+        int GenStatStr; // Generate strength stat
+        int GenStatCrg; // Generate courage stat
+    public:
+        std::string Name; //Name variable
+        int StatStr = 0; // Final Strength variable
+        int StatCrg = 0; // Final Courage variable
+        int QstDiff; // Quest Difficulty variable
+        int QstScsChc; // Quest Success Chance variable
+        Hero(std::string n) : Name(n) {
+            StatGen();
+        }
+        void StatGen() { //generate random stats for hero
+            GenStatStr = std::rand() % 25 + 1; //random strength between 1 and 25
+            GenStatCrg = std::rand() % 25 + 1; //random courage between 1 and 25
+            StatStr += GenStatStr;
+            StatCrg += GenStatCrg;
+        }
+    void GetStats() { //get the hero's stats
         std::cout << "Strength: " << StatStr << std::endl;
         std::cout << "Courage: " << StatCrg << std::endl;
     }
-
     void Train() { //hero trains to increase strength 
-         StatStr += 5; //increase strength by 5
+        StatStr += 5; //increase strength by 5
     } 
 
     void Therapy() { //hero goes to therapy to increase courage
         StatCrg += 5; //increase courage by 5
-    } 
+    }
+    void Quest() { //going on a Quest
+        std::cout << "Your hero is going on a quest!" << std::endl;
+        QstDiff = std::rand() % 100 + 35; //random number between 35 and 135
+        QstScsChc = 50 + StatStr; // quest success Chance is 50% chance + strength stat            
+    }
 };
 
+
 int main() {
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+    
     //question for the user to input their hero's name
     std::string heroName;
     std::cout << "Enter your hero's name: ";
     std::getline(std::cin, heroName);
 
     Hero hero(heroName);
-    hero.getStats();
-
+     hero.GetStats();
+    
     int choice; //choosing between training and therapy
-        std::cout << "What would you like your hero to do? (1) Train (2) Therapy: ";
-        std::cin >> choice;
-        if (choice == 1) {
-        hero.Train(); //the hero trains to increase strength
-        } 
-        else if (choice == 2) {
-        hero.Therapy(); //the hero goes to therapy to increase courage 
-        } 
-        else {
-        std::cout << "Invalid choice. Please choose 1 or 2." << std::endl;
-        }
-        hero.getStats(); //display the updated stats
+        while (true) {
+            std::cout << "What would you like your hero to do? (1) Go to Train (2) Go to Therapy (3) Go on a Quest (0) Exit: ";
+            std::cin >> choice;
+            std::string input;
+            getline(std::cin, input); //clear the input buffer
+            if (choice == 1) {
+                hero.Train(); //the hero trains to increase strength
+                std::cout << "Hero: " << hero.Name << std::endl;
+                hero.GetStats(); //display the updated strength
+                continue;
+            } 
+            else if (choice == 2) {
+                hero.Therapy(); //the hero goes to therapy to increase courage
+                std::cout << "Hero: " << hero.Name << std::endl;
+                hero.GetStats(); //display the updated courage
+                continue;
+            } 
+            else if (choice == 3) {
+                std::cout << "Your hero goes on a quest!" << std::endl;
+                hero.Quest(); //the hero goes on a quest    
+                if (hero.QstDiff <= hero.QstScsChc) { //complete success
+                    std::cout << "Your hero succeeded on the quest!" << std::endl;
+                    hero.StatCrg -= 2; //decrease courage by 2 from exhaustion
+                    std::cout << "Hero: " << hero.Name << std::endl;
+                    hero.GetStats(); //display the updated stats
+                    continue;
+                }
+                else if (hero.QstDiff > hero.QstScsChc && hero.QstScsChc >= 85) { //almost succeeded
+                    std::cout << "Your hero almost succeeded on the quest." << std::endl;
+                    hero.StatStr -= 5; //decrease strength by 5 due to minor injuries
+                    hero.StatCrg -= 5; //decrease courage by 5 from exhaustion
+                    std::cout << "Hero: " << hero.Name << std::endl;
+                    hero.GetStats(); //display the updated stats
+                    continue;
+                }
+                else { // complete failure
+                    std::cout << "Your hero failed the quest." << std::endl;
+                    hero.StatCrg -= 10; //decrease courage by 10 from fear and disappointment
+                    hero.StatStr -= 10; //decrease strength by 10 due to injuries
+                    std::cout << "Hero: " << hero.Name << std::endl;
+                    hero.GetStats(); //display the updated stats
+                    continue;
+                }           
+            }
+            else if (choice == 0) {
+                std::cout << "Farewell for Now!"; std::cin >> choice;
+                return 0;
+            }
+            else {
+                std::cout << "Invalid choice. Please choose 1,2,3 or 0." << std::endl;
+                continue;
+            }            
+        
     return 0;
-
-};
-    return 0;
-
-};
+    }
+}
