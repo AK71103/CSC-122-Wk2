@@ -39,4 +39,4 @@ When you're done, answer the following Thought-Provoking Questions:
 2) How easy would it be for you to expand your code, giving your hero new stats and things they can do?
 
 3) This is a framework that could be used as part of a game. Is there anything that feels like it's missing? Any obvious expansions you would make to this code?
-
+---------------------------------------------------------------------------------------------
